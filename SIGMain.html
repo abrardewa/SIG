@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.1/dist/L.Control.Locate.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="leaflet-search-master//src/leaflet-search.css" />
 
     <style type="text/css">
 
@@ -15,130 +16,73 @@
 		}
 	</style>
 </head>
-<body>
-	<div id="map"></div>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-   crossorigin=""></script>
-   <script src="leaflet-search-master/src/leaflet-search.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.1/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+    <body>
+        <div id="map"></div>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <script src="leaflet-search-master/src/leaflet-search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.1/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 
-	<script type="text/javascript">
-		var mymap = L.map('map').setView([-5.373476204876448, 105.2916931944117], 14);
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
-        }).addTo(mymap);
+        <script type="text/javascript">
+            var rs = [
+            {"loc":[105.324885400000085, -5.480107430999965], "title":"Balai Pengobatan Lanal Lampung"},
+            {"loc":[-5.447410414999979,105.256594272000086], "title":"Rumah Sakit Ibu dan Anak Restu Bunda"},
+            {"loc":[-5.442533183999956,105.267038648000039], "title":"Kantor PMI Lampung"},
+            {"loc":[-5.442386254999974,105.267662231000088], "title":"Rumah Sakit Ibu dan Anak Santa Anna Bandarlampung"},
+            {"loc":[-5.436485058999949,105.252392072000077], "title":"Rumah Sakit Umum Daerah Dr A Dadi Tjokrodipo Bandarlampung"},
+            {"loc":[-5.429783518999955,105.270983379000086], "title":"Rumah Sakit Assyifa Bandarlampung"},
+            {"loc":[-5.424948495999956,105.250776567000059], "title":"Rumah Sakit Bumiwaras"},	
+            {"loc":[-5.424769126999934,105.250921583000036], "title":"Rumah Sakit Dwi Laras Bandarlampung"},
+            {"loc":[-5.422932181999954,105.262503767000055], "title":"Rumah Sakit Ibu dan Anak Mutiara Putri"},
+            {"loc":[-5.420484361999968,105.262875984000061], "title":"Kantor PMI Bandarlampung"},
+            {"loc":[-5.419755642999974,105.26044199200004], "title":"Rumah Sakit Bersalin Anugerah Medika Lampung"},
+            {"loc":[-5.413538183999947,105.267497505000051], "title":"Rumah Sakit Graha Husada Tanjungagungraya"},	
+            {"loc":[ -5.404944679999971,105.257545220000054], "title":"Rumah Sakit Bersalin Xaverius Bandarlampung"},
+            {"loc":[-5.402926110999942,105.258926633000044], "title":"Rumah Sakit Umum Daerah Abdul Moeloek Lampung"},
+            {"loc":[-5.401761295999961,105.258649357000081], "title":"Rumah Sakit Tingkat IV Bandarlampung"},
+            {"loc":[-5.400732214999948,105.257649449000041], "title":"Kantor PMI Lampung"},
+            {"loc":[-5.394111828999939,105.266016568000055], "title":"Rumah Sakit Ibu dan Anak Betik Hati"},
+            {"loc":[-5.392555061999929,105.226498061000086], "title":"Rumah Sakit Ibu dan Anak Sinta Langkapura"},
+            {"loc":[-5.392093601999932,105.26212713700005], "title":"Rumah Sakit Advent Bandarlampung"},
+            {"loc":[-5.391089970999928,105.276595205000035], "title":"Rumah Sakit Urip Sumoharjo"},
+            {"loc":[-5.390625349999937,105.217797552000036], "title":"Pusat Kesehatan Hewan Bandarlampung"},
+            {"loc":[-5.386027953999928,105.287550755000041], "title":"Rumah Sakit Imanuel Bandarlampung"},
+            {"loc":[-5.383106387999931,105.221576863000053], "title":"Pelayanan dan Rehabilitasi Sosial Penyandang Cacat"},
+            {"loc":[-5.374049911999975,105.224263362000045], "title":"Rumah Sakit Bhayangkari Polda Lampung"}
+            ];
+            var mymap = new L.map('map').setView([-5.373476204876448, 105.2916931944117], 14);
+            mymap.addLayer(new L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
+            }));
+            
+            L.control.locate().addTo(mymap);
+            var markersLayer = new L.LayerGroup();	//layer contain searched elements
         
-        var geojsonFeature = [
-        {"loc":[105.324885400000085, -5.480107430999965], "title":"Balai Pengobatan Lanal Lampung"},
-        {"loc":[105.256594272000086, -5.447410414999979], "title":"Rumah Sakit Ibu dan Anak Restu Bunda"},
-        {"loc":[105.267038648000039, -5.442533183999956], "title":"Kantor PMI Lampung"},
-        {"loc":[105.267662231000088, -5.442386254999974], "title":"Rumah Sakit Ibu dan Anak Santa Anna Bandarlampung"},
-        {"loc":[105.252392072000077, -5.436485058999949], "title":"Rumah Sakit Umum Daerah Dr A Dadi Tjokrodipo Bandarlampung"},
-        {"loc":[105.270983379000086, -5.429783518999955], "title":"Rumah Sakit Assyifa Bandarlampung"},
-        {"loc":[105.250776567000059, -5.424948495999956], "title":"Rumah Sakit Bumiwaras"},	
-        {"loc":[105.250921583000036, -5.424769126999934], "title":"Rumah Sakit Dwi Laras Bandarlampung"},
-        {"loc":[105.262503767000055, -5.422932181999954], "title":"Rumah Sakit Ibu dan Anak Mutiara Putri"},
-        {"loc":[105.262875984000061, -5.420484361999968], "title":"Kantor PMI Bandarlampung"},
-        {"loc":[105.26044199200004, -5.419755642999974], "title":"Rumah Sakit Bersalin Anugerah Medika Lampung"},
-        {"loc":[105.267497505000051, -5.413538183999947], "title":"Rumah Sakit Graha Husada Tanjungagungraya"},	
-        {"loc":[105.257545220000054, -5.404944679999971], "title":"Rumah Sakit Bersalin Xaverius Bandarlampung"},
-        {"loc":[105.258926633000044, -5.402926110999942], "title":"Rumah Sakit Umum Daerah Abdul Moeloek Lampung"},
-        {"loc":[105.258649357000081, -5.401761295999961], "title":"Rumah Sakit Tingkat IV Bandarlampung"},
-        {"loc":[105.257649449000041, -5.400732214999948], "title":"Kantor PMI Lampung"},
-        {"loc":[105.266016568000055, -5.394111828999939], "title":"Rumah Sakit Ibu dan Anak Betik Hati"},
-        {"loc":[105.226498061000086, -5.392555061999929], "title":"Rumah Sakit Ibu dan Anak Sinta Langkapura"},
-        {"loc":[105.26212713700005, -5.392093601999932], "title":"Rumah Sakit Advent Bandarlampung"},
-        {"loc":[105.276595205000035, -5.391089970999928], "title":"Rumah Sakit Urip Sumoharjo"},
-        {"loc":[105.217797552000036, -5.390625349999937], "title":"Pusat Kesehatan Hewan Bandarlampung"},
-        {"loc":[105.287550755000041, -5.386027953999928], "title":"Rumah Sakit Imanuel Bandarlampung"},
-        {"loc":[105.221576863000053, -5.383106387999931], "title":"Pelayanan dan Rehabilitasi Sosial Penyandang Cacat"},
-        {"loc":[105.224263362000045, -5.374049911999975], "title":"Rumah Sakit Bhayangkari Polda Lampung"}
-        ];
-        L.geoJSON(geojsonFeature).addTo(mymap);
-        L.control.locate().addTo(mymap);
-        var markersLayer = new L.LayerGroup();	//layer contain searched elements
-	
-        mymap.addLayer(markersLayer);
-
-        var controlSearch = new L.Control.Search({
-            position:'topright',		
-            layer: markersLayer,
-            initial: false,
-            zoom: 12,
-            marker: false
-        });
-
-        map.addControl( controlSearch );
-        for(i in geojsonFeature) {
-		var title = geojsonFeature[i].title,	//value searched
-			loc = geojsonFeature[i].loc,		//position found
-			marker = new L.Marker(new L.latLng(loc), {title: title} ).addTo(mymap);//se property searched
-		marker.bindPopup('title: '+ title );
-		markersLayer.addLayer(marker);
-	    }
+            mymap.addLayer(markersLayer);
+            var controlSearch = new L.Control.Search({
+                position:'topleft',		
+                layer: markersLayer,
+                initial: false,
+                zoom: 20,
+                marker: false
+            });
+            mymap.addControl( controlSearch );
+            for(i in rs){
+                var title = rs[i].title;	//value searched
+                var loc = rs[i].loc;	//position found
+                var marker = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
+                marker.bindPopup( title );
+                markersLayer.addLayer(marker);
+            }
+            
 
         </script>
     
     </body>
 </html>
-
-
-	<!-- //sample data values for populate map
-	var data = [
-		{"loc":[41.575330,13.102411], "title":"aquamarine"},
-		{"loc":[41.575730,13.002411], "title":"black"},
-		{"loc":[41.807149,13.162994], "title":"blue"},
-		{"loc":[41.507149,13.172994], "title":"chocolate"},
-		{"loc":[41.847149,14.132994], "title":"coral"},
-		{"loc":[41.219190,13.062145], "title":"cyan"},
-		{"loc":[41.344190,13.242145], "title":"darkblue"},	
-		{"loc":[41.679190,13.122145], "title":"Darkred"},
-		{"loc":[41.329190,13.192145], "title":"Darkgray"},
-		{"loc":[41.379290,13.122545], "title":"dodgerblue"},
-		{"loc":[41.409190,13.362145], "title":"gray"},
-		{"loc":[41.794008,12.583884], "title":"green"},	
-		{"loc":[41.805008,12.982884], "title":"greenyellow"},
-		{"loc":[41.536175,13.273590], "title":"red"},
-		{"loc":[41.516175,13.373590], "title":"rosybrown"},
-		{"loc":[41.506175,13.273590], "title":"royalblue"},
-		{"loc":[41.836175,13.673590], "title":"salmon"},
-		{"loc":[41.796175,13.570590], "title":"seagreen"},
-		{"loc":[41.436175,13.573590], "title":"seashell"},
-		{"loc":[41.336175,13.973590], "title":"silver"},
-		{"loc":[41.236175,13.273590], "title":"skyblue"},
-		{"loc":[41.546175,13.473590], "title":"yellow"},
-		{"loc":[41.239190,13.032145], "title":"white"}
-	];
-
-	var map = new L.Map('map', {zoom: 9, center: new L.latLng(data[0].loc) });	//set center from first location
-
-	map.addLayer(new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));	//base layer
-
-	var markersLayer = new L.LayerGroup();	//layer contain searched elements
-	
-	map.addLayer(markersLayer);
-
-	var controlSearch = new L.Control.Search({
-		position:'topright',		
-		layer: markersLayer,
-		initial: false,
-		zoom: 12,
-		marker: false
-	});
-
-	map.addControl( controlSearch );
-
-	////////////populate map with markers from sample data
-	for(i in data) {
-		var title = data[i].title,	//value searched
-			loc = data[i].loc,		//position found
-			marker = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
-		marker.bindPopup('title: '+ title );
-		markersLayer.addLayer(marker);
-	} -->
