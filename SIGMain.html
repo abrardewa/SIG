@@ -62,7 +62,7 @@
             }));
             
             L.control.locate().addTo(mymap);
-            var markersLayer = new L.LayerGroup();	//layer contain searched elements
+            var markersLayer = new L.LayerGroup();
         
             mymap.addLayer(markersLayer);
             var controlSearch = new L.Control.Search({
@@ -74,9 +74,9 @@
             });
             mymap.addControl( controlSearch );
             for(i in rs){
-                var title = rs[i].title;	//value searched
-                var loc = rs[i].loc;	//position found
-                var marker = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
+                var title = rs[i].title;	
+                var loc = rs[i].loc;	
+                var marker = new L.Marker(new L.latLng(loc), {title: title} );
                 marker.bindPopup( title );
                 markersLayer.addLayer(marker);
             }
